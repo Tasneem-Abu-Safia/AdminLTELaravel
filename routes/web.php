@@ -1,5 +1,7 @@
 <?php
 
+use App\Http\Controllers\Web\Admin\AdminAuthController;
+use App\Http\Controllers\Web\DashBoard\LocalizationController;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
 
@@ -19,6 +21,20 @@ Route::get('/', function () {
 });
 
 
-Auth::routes();
+//Auth::routes();
+//
+//Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
 
-Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+Route::get('/login', [AdminAuthController::class, 'getLogin'])->name('login');
+Route::post('/login', [AdminAuthController::class, 'postLogin'])->name('adminLoginPost');
+
+
+Route::group(['middleware' => 'adminauth'], function () {
+    Route::get('/adminDashboard', function () {
+        return view('home');
+    })->name('adminDashboard');
+
+    Route::post('lang/{lang}', [LocalizationController::class, 'setLang'])->name('lang');
+
+    Route::post('/logout', [AdminAuthController::class, 'adminLogout'])->name('logout');
+});

@@ -1,6 +1,6 @@
 @extends('layouts.DashBoard.master')
 
-@section('title')
+@section('titlePage')
     {{-- Page title--}}
 @endsection
 
@@ -8,14 +8,16 @@
 
 @endsection
 
-@section('titleRight')
-    {{-- left title1   --}}
+@section('parentTitle')
+
 @endsection
-@section('titleLeft_page1')
-    {{-- left title1   --}}
+
+@section('childTitle')
+
 @endsection
-@section('titleLeft_page2')
-    {{-- left title2   --}}
+
+@section('mainTitle')
+
 @endsection
 
 @section('content')
